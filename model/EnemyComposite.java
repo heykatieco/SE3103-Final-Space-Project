@@ -53,16 +53,23 @@ public class EnemyComposite extends GameElement {
     @Override
     public void animate() {
         int dx = UNIT_MOVE;
+        int dy = ENEMY_SIZE; // for moving along y axis
         if (movingToRight){
             if(rightEnd() >= GameBoard.WIDTH){
                 dx = -dx;
                 movingToRight = false;
+                dy = -dy;
+                yMovement(dy);
+            
             }
         } else {
             dx = -dx;
             if (leftEnd() <= 0){
                 dx =-dx;
                 movingToRight = true;
+                dy = -dy;
+                yMovement(dy);
+
             }
         }
 
@@ -70,15 +77,21 @@ public class EnemyComposite extends GameElement {
         for (var row: rows){
             for (var e: row) {
                 e.x += dx;
+                
             }
         }
+
+       
+        
 
         // animate bombs
         for (var b: bombs){
             b.animate();
         }
+
         
-    }
+        
+    } // end of animate method
 
     private int rightEnd(){
         int xEnd = -100;
@@ -112,6 +125,15 @@ public class EnemyComposite extends GameElement {
         }
     }
 
+    public void yMovement(int dy){
+        // update y for rows to lower enemy when it hits a wall
+        for (var row: rows){
+            for (var e: row) {
+                e.y -= dy;
+            }
+        }
+    }
+
     public void removeBombsOutOfBound() {
         var remove = new ArrayList<GameElement>();
         for ( var b: bombs) {
@@ -137,6 +159,9 @@ public class EnemyComposite extends GameElement {
                         removeBullets.add(bullet);
                         removeEnemies.add(enemy);
                     }
+
+                    // i think here is where we will process the collision of shooter and bullets
+                    // if (shooter.collideWith(bullet)) we follow similar as to removeBullets
                 }
             }
             row.removeAll(removeEnemies);

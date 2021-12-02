@@ -1,15 +1,20 @@
 package controller;
 
 import java.awt.event.ActionListener;
+import java.awt.Color;
 import java.util.LinkedList;
 
 import model.Bullet;
 import model.Shooter;
 import view.GameBoard;
+import view.TextDraw;
+
 
 import java.awt.event.ActionEvent;
 
 public class TimerListener implements ActionListener {
+
+
 
     public enum EventType {
         KEY_RIGHT, KEY_LEFT, KEY_SPACE
@@ -31,6 +36,7 @@ public class TimerListener implements ActionListener {
         update();
         processEventQueue();
         processCollision();
+        
         gameBoard.getCanvas().repaint();
         
     }
@@ -38,7 +44,9 @@ public class TimerListener implements ActionListener {
     private void update(){
         for( var e: gameBoard.getCanvas().getGameElements()){
             e.animate();
+            
         }
+        
     }
 
     private void processCollision() {
@@ -82,4 +90,6 @@ public class TimerListener implements ActionListener {
     public LinkedList<EventType> getEventQueue() {
         return eventQueue;
     }
+
+    
 }

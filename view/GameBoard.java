@@ -29,6 +29,8 @@ public class GameBoard {
     private Timer timer;
     private TimerListener timerListener;
     private EnemyComposite enemyComposite;
+    
+
 
     public GameBoard(JFrame window){
         this.window = window;
@@ -65,6 +67,9 @@ public class GameBoard {
             canvas.getGameElements().add(shooter);
             canvas.getGameElements().add(enemyComposite);
             timer.start();
+            // this is not displaying score in real time, just at beginning
+            canvas.getGameElements().add(new TextDraw(enemyComposite.displayScore(), 500, 20, Color.red, 15));
+            
         });
 
         quitButton.addActionListener(event -> System.exit(0)); 
@@ -89,4 +94,5 @@ public class GameBoard {
     public EnemyComposite getEnemyComposite() {
         return enemyComposite;
     }
+    
 }

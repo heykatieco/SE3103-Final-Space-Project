@@ -74,5 +74,8 @@ public class Shooter extends GameElement{
         for(var w: weapons)
             w.animate();
     }
+
+    // we can remove an element from the array  when a collision occurs
+    // maybe a method will work with that here 
     
 }

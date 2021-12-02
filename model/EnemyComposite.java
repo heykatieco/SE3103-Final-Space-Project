@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import view.GameBoard;
+import view.TextDraw;
 
 import java.awt.Color;
 
@@ -14,11 +15,14 @@ public class EnemyComposite extends GameElement {
     public static final int NCOLS = 10;
     public static final int ENEMY_SIZE = 20;
     public static final int UNIT_MOVE = 5;
+    public static final int POINTS = 10;
 
     private ArrayList<ArrayList<GameElement>> rows;
     private ArrayList<GameElement> bombs;
+    
     private boolean movingToRight = true;
     private Random random = new Random();
+    private int score = 50;
 
     public EnemyComposite() {
         rows = new ArrayList<>();
@@ -43,10 +47,13 @@ public class EnemyComposite extends GameElement {
             }
         }
 
-        // render bomnbs
+        // render bombs
         for (var b: bombs){
             b.render(g2);
         }
+
+        
+
         
     }
 
@@ -90,6 +97,8 @@ public class EnemyComposite extends GameElement {
         }
 
         
+
+        
         
     } // end of animate method
 
@@ -130,8 +139,18 @@ public class EnemyComposite extends GameElement {
         for (var row: rows){
             for (var e: row) {
                 e.y -= dy;
+                if (e.y >= GameBoard.HEIGHT) {
+
+                    System.exit(0);
+                    // the logic works but the canvas isn't clearing yet
+                    // here is where we want the game to end and display you lose
+                }
             }
         }
+
+        // if y reaches the bottom of the screen where x = 0, then game over
+
+        
     }
 
     public void removeBombsOutOfBound() {
@@ -158,17 +177,24 @@ public class EnemyComposite extends GameElement {
                     if (enemy.collideWith(bullet)) {
                         removeBullets.add(bullet);
                         removeEnemies.add(enemy);
-                    }
+                        // this is the right place to calc score with hits
+                        score += POINTS;
+                    System.out.println(score);
 
-                    // i think here is where we will process the collision of shooter and bullets
-                    // if (shooter.collideWith(bullet)) we follow similar as to removeBullets
+                    }
+                    
+                
+                    
+                    
+                    
                 }
             }
             row.removeAll(removeEnemies);
+            
         }
         shooter.getWeapons().removeAll(removeBullets);
 
-        // bulets vs bombs
+        // bullets vs bombs
         var removeBombs = new ArrayList<GameElement>();
         removeBullets.clear();
 
@@ -183,6 +209,18 @@ public class EnemyComposite extends GameElement {
 
         shooter.getWeapons().removeAll(removeBullets);
         bombs.removeAll(removeBombs);
+    }
+    public void setScore(int score) {
+        this.score = score;
+    }
+    public int getScore() {
+        return score;
+    }
+    public String displayScore(){
+        String display = "Score: " + score;
+        return display;
+
+        
     }
     
 }

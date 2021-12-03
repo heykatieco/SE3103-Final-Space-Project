@@ -2,12 +2,14 @@ package controller;
 
 import java.awt.event.ActionListener;
 import java.awt.Color;
+
 import java.util.LinkedList;
 
 import model.Bullet;
 import model.Shooter;
 import view.GameBoard;
 import view.TextDraw;
+
 
 
 import java.awt.event.ActionEvent;
@@ -24,11 +26,16 @@ public class TimerListener implements ActionListener {
     private LinkedList<EventType> eventQueue;
     private final int BOMB_DROP_FREQ = 20;
     private int frameCounter = 0;
+    private TextDraw scoreDisplay = new TextDraw("Score: " + gameBoard.getEnemyComposite().getScore(), 500, 20, Color.red, 15);
+   
+
 
     public TimerListener(GameBoard gameBoard){
         this.gameBoard = gameBoard;
         eventQueue = new LinkedList<>();
     }
+
+    
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -36,6 +43,7 @@ public class TimerListener implements ActionListener {
         update();
         processEventQueue();
         processCollision();
+        
         
         gameBoard.getCanvas().repaint();
         

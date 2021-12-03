@@ -4,6 +4,7 @@ import java.awt.Graphics2D;
 
 public abstract class GameElement {
 
+
     public int x;
     public int y;
     public Color color;
@@ -26,6 +27,10 @@ public abstract class GameElement {
     
     public GameElement(int x, int y, int width, int height){
         this(x, y, Color.white, false, width, height);
+    }
+
+    public void doRender(){
+        // renderBehavior.render();
     }
 
     public boolean collideWith(GameElement another){

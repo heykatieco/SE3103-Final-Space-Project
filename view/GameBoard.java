@@ -8,6 +8,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Timer;
+import javax.swing.JLabel;
 
 import controller.KeyController;
 import controller.TimerListener;
@@ -29,6 +30,8 @@ public class GameBoard {
     private Timer timer;
     private TimerListener timerListener;
     private EnemyComposite enemyComposite;
+   
+
     
 
 
@@ -47,6 +50,7 @@ public class GameBoard {
 
         JButton startButton = new JButton("Start");
         JButton quitButton = new JButton("Quit");
+        
         startButton.setFocusable(false);
         quitButton.setFocusable(false);
 
@@ -66,9 +70,9 @@ public class GameBoard {
             canvas.getGameElements().clear();
             canvas.getGameElements().add(shooter);
             canvas.getGameElements().add(enemyComposite);
+            // canvas.getGameElements().add(new TextDraw(enemyComposite.displayScore(), 500, 20, Color.red, 15));
             timer.start();
-            // this is not displaying score in real time, just at beginning
-            canvas.getGameElements().add(new TextDraw(enemyComposite.displayScore(), 500, 20, Color.red, 15));
+            
             
         });
 

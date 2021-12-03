@@ -14,6 +14,7 @@ public class MyCanvas  extends JPanel {
     
     private GameBoard gameBoard;
     private ArrayList<GameElement> gameElements = new ArrayList<>();
+    
 
     public MyCanvas(GameBoard gameBoard, int width, int height){
         this.gameBoard = gameBoard;
@@ -25,6 +26,8 @@ public class MyCanvas  extends JPanel {
     public void paintComponent(Graphics g){
         super.paintComponent(g);
 
+        
+
         Graphics2D g2 = (Graphics2D) g;
 
         for (var e: gameElements){
@@ -35,5 +38,7 @@ public class MyCanvas  extends JPanel {
     public ArrayList<GameElement> getGameElements() {
         return gameElements;
     }
+
+    
 
 }

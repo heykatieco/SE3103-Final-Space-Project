@@ -26,7 +26,7 @@ public class TimerListener implements ActionListener {
     private LinkedList<EventType> eventQueue;
     private final int BOMB_DROP_FREQ = 20;
     private int frameCounter = 0;
-    private TextDraw scoreDisplay = new TextDraw("Score: " + gameBoard.getEnemyComposite().getScore(), 500, 20, Color.red, 15);
+    
    
 
 

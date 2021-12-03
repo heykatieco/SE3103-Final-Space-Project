@@ -70,7 +70,7 @@ public class GameBoard {
             canvas.getGameElements().clear();
             canvas.getGameElements().add(shooter);
             canvas.getGameElements().add(enemyComposite);
-            // canvas.getGameElements().add(new TextDraw(enemyComposite.displayScore(), 500, 20, Color.red, 15));
+            canvas.getGameElements().add(new TextDraw(enemyComposite.displayScore(), 500, 20, Color.red, 15));
             timer.start();
             
             
